@@ -2,7 +2,6 @@ var express = require("express");
 var app = express();
 const path = require("path"); 
 const fs = require("fs");
-const pdfjsLib = require('pdfjs-dist');
 const PDFParser = require('pdf-parse');
 const util = require('util');
 const stat = util.promisify(fs.stat);
@@ -89,7 +88,7 @@ app.post('/upload', upload.array('files'), (req, res) => {
             let totalPages;
         
             if (file.mimetype === 'application/pdf') {
-              base64String = await pageToBase64(file.path, pageNumber);
+              base64String = base64;
               singlePage = base64String;
               totalPages = await calculateTotalPages(file.path);
             } else if (file.mimetype === 'text/plain') {
@@ -145,15 +144,7 @@ io.on("connection", (socket) => {
     });
   });
 
-  async function pageToBase64(pdfPath, pageNumber) {
-    const data = new Uint8Array(fs.readFileSync(pdfPath));
-    const pdf = await pdfjsLib.getDocument(data).promise;
-    const page = await pdf.getPage(pageNumber);
-    const pageData = await page.getTextContent();
-    const pageText = pageData.items.map(item => item.str).join('');
-    const base64 = Buffer.from(pageText).toString('base64');
-    return base64;
-  }
+
 
   async function calculateTotalPages(filePath) {
     const pdfBuffer = fs.readFileSync(filePath);
