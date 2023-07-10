@@ -81,24 +81,7 @@ app.post('/upload', upload.array('files'), (req, res) => {
           const buffer = fs.readFileSync(file.path);
           const base64 = buffer.toString('base64');
           const pageNumber = 1;
-          // if (file.mimetype !== 'application/pdf') {
-          //   console.log('Skipping non-PDF file:', file.originalname);
-          //   return null;
-          // }
-          // try {
-          //   const base64String = await pageToBase64(file.path, pageNumber);
-          //   const singlePage = base64String;
-          //   const stats = await stat(file.path);
-          //   const fileSizeKB = Math.ceil(stats.size / 1024);
-          //   const totalPages = await calculateTotalPages(file.path);
-          //   console.log(totalPages);
-          //   return {
-          //     originalname: file.originalname,
-          //     buffer: base64,
-          //     singlePage: singlePage,
-          //     sizeKB: fileSizeKB,
-          //     totalPages:totalPages,
-          //   };
+       
 
           try {
             let base64String;
