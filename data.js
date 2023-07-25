@@ -29,7 +29,7 @@ const contactList = [
     },
     {
         id: 6,
-        name: "7983887462",
+        name: "7875487915",
         profilePic: "",
         lastText: "where are you form",
         lastTextTime: "12:30 PM",
